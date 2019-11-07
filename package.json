@@ -1,0 +1,31 @@
+{
+  "name": "prime-ex-fe-006",
+  "version": "1.0.0",
+  "description": "- Using Resource GRIDSTACK.JS in order to build project.",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^4.13.0",
+    "serve": "^11.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass scss -o css",
+    "scss:watch": "npm run css && node-sass scss -wo css",
+    "build": "babel src -d build",
+    "start": "serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoanguyen1203/prime-ex-fe-006.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoanguyen1203/prime-ex-fe-006/issues"
+  },
+  "homepage": "https://github.com/hoanguyen1203/prime-ex-fe-006#readme"
+}

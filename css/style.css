@@ -1,0 +1,133 @@
+* {
+  color: #222222;
+  font-size: 16px; }
+
+body,
+h1,
+h2 {
+  margin: 0;
+  padding: 0 !important; }
+
+h1 {
+  font-size: 24px; }
+
+h2 {
+  font-size: 20px;
+  font-weight: 700; }
+
+button {
+  background-color: transparent;
+  border: none;
+  padding: 0; }
+
+button:focus {
+  outline: none; }
+
+.w-70 {
+  width: 70%; }
+
+#app {
+  display: flex;
+  flex-wrap: wrap; }
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #F08080; }
+  .header__left {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px; }
+  .header__right {
+    width: 70%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; }
+  .header__button {
+    background-color: transparent;
+    border: none; }
+
+.sidebar {
+  width: 30%;
+  min-height: 100vh;
+  border-right: 1px solid #DCDCDC; }
+  .sidebar > div {
+    padding: 15px 20px; }
+  .sidebar__account {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #DCDCDC; }
+  .sidebar__avatar {
+    width: 60px;
+    height: 60px; }
+    .sidebar__avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 100%; }
+  .sidebar__name-account {
+    padding-left: 20px; }
+
+.contents {
+  width: 70%;
+  padding: 30px 0; }
+
+.content {
+  padding: 20px 50px; }
+  .content__time, .content__day {
+    display: inline-block; }
+  .content__time {
+    font-size: 24px; }
+  .content__day {
+    font-size: 14px;
+    color: #A9A9A9;
+    padding-left: 10px; }
+  .content__body {
+    padding: 20px 0;
+    border-bottom: 1px solid #DCDCDC; }
+  .content__task {
+    display: flex;
+    justify-content: space-between; }
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; }
+  .label__icon, .label__name {
+    display: inline-block; }
+  .label__name {
+    padding-left: 10px; }
+  .label__number {
+    color: #A9A9A9;
+    font-weight: 400; }
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; }
+  .project__icon, .project__name {
+    display: inline-block; }
+  .project__icon {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #DCDCDC;
+    border-radius: 100%;
+    margin: 0 5px; }
+  .project__number {
+    color: #A9A9A9; }
+  .project__add {
+    color: #F08080;
+    background-color: transparent;
+    border: none;
+    margin: 20px 0;
+    display: flex;
+    align-items: center; }
+    .project__add i {
+      margin-right: 5px;
+      color: #F08080; }
+
+.rotate-180 {
+  transform: rotate(180deg); }
