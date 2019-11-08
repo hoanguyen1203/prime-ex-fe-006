@@ -88,6 +88,7 @@ button:focus {
     border-bottom: 1px solid #DCDCDC; }
   .content__task {
     display: flex;
+    align-items: center;
     justify-content: space-between; }
 
 .label {
@@ -131,3 +132,12 @@ button:focus {
 
 .rotate-180 {
   transform: rotate(180deg); }
+
+.task__name {
+  font-size: 20px;
+  margin-left: 10px; }
+
+.completed .task__name,
+.completed .project__name {
+  color: #DCDCDC;
+  text-decoration: line-through; }

@@ -24,137 +24,23 @@
 
 <body>
     <div id="app">
+        <header-component></header-component>        
 
-        <header class="header">
-            <div class="header__left">
-                <button class="header__button"><i class="fa fa-bars" aria-hidden="true"></i></button>
-                <button class="header__button"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </div>
-            <div class="header__right">
-                <h1 class="header__title">Next 7 Days</h1>
-                <button class="header__add-task" data-toggle="modal" data-target="#modalAddTask">
-                    <i class="material-icons">add</i>
-                </button>
-            </div>
-        </header>
-
-        <aside class="sidebar">
-            <div class="sidebar__account">
-                <div class="sidebar__avatar">
-                    <img src="/images/avatar.jpeg" alt="Avatar">
-                </div>
-                <div class="sidebar__name-account">
-                    {{ accountName }}
-                </div>
-            </div>
-            <div class="sidebar__labels">
-                <div class="label" v-for="label in labels">
-                    <div class="label__title">
-                        <div class="label__icon"><i v-bind:class="label.icon"></i></div>
-                        <div class="label__name">{{ label.name }}</div>
-                    </div>
-                    <div class="label__number">{{ label.number }}</div>
-                </div>
-            </div>
-            <div class="sidebar__projects">
-                <div class="project">
-                    <h2>{{ projectTitle }}</h2>
-                    <button :class="{ 'rotate-180': down }" href="#show-projects" data-toggle="collapse"
-                        @click="toggleRotate"><i class="fa fa-angle-up"></i></button>
-                </div>
-                <div id="show-projects" class="projects collapse show">
-                    <div class="project" v-for="project in projects">
-                        <div class="project__title">
-                            <div class="project__icon" v-bind:style="{ 'background-color': project.color }"></div>
-                            <div class="project__name">{{ project.name }}</div>
-                        </div>
-                        <div class="project__number">{{ project.number }}</div>
-                    </div>
-
-                    <button class="project__add" data-toggle="modal" data-target="#modalAddProject">
-                        <i class="material-icons">add</i>
-                        {{ projectAddTitle }}
-                    </button>
-                </div>
-            </div>
-        </aside>
+        <sidebar-component></sidebar-component>
 
         <section class="contents">
-            <div class="content">
-                <div class="content__header">
-                    <div class="content__time">Today</div>
-                    <div class="content__day">January 30</div>
-                </div>
-                <div class="content__body" v-for="task in tasks">
-                    <div class="content__task">
-                        <div>
-                            <input type="radio">
-                            <span>{{ task.name }}</span>
-                        </div>
-                        <div class="project">
-                            <div class="project__name">{{ task.selected.name }}</div>
-                            <div class="project__icon" v-bind:style="{ 'background-color': task.selected.color }"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <content-component></content-component>
+            <!-- <div class="content">
+                <content-header></content-header>
+                <task-component></task-component>
+            </div> -->
         </section>
 
         <!-- Modal Add New Project -->
-        <div id="modalAddProject" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">{{ projectAddTitle }}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" class="form-control" v-model="newProject" placeholder="New Project">
-                        </div>
-                        <div class="form-group">
-                            <input type="color" name="choise-color" class="form-control" v-model="newProjectColor">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" @click="addProject">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        <modal-add-project-component></modal-add-project-component>
 
         <!-- Modal Add New Task -->
-        <div id="modalAddTask" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">{{ taskAddTitle }}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" class="form-control" v-model="newTask" placeholder="New Task">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" v-model="selected">
-                                <option v-for="project in projects" v-bind:value="project">{{ project.name }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" @click="addTask">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        <modal-add-task-component></modal-add-task-component>
 
     </div>
 </body>

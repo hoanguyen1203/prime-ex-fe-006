@@ -113,6 +113,7 @@ button:focus {
     }
     &__task {
         display: flex;
+        align-items: center;
         justify-content: space-between;
     }
 }
@@ -172,7 +173,17 @@ button:focus {
     transform: rotate(180deg);
 }
 
-// .modal-open .modal.in {
-//     display: flex !important;
-//     align-items: center;
-// }
+.task {
+    &__name {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+}
+
+.completed {
+    .task__name,
+    .project__name {
+        color: #DCDCDC;
+        text-decoration: line-through;
+    }
+}
