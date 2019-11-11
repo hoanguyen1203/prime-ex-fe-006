@@ -83,13 +83,12 @@ button:focus {
     font-size: 14px;
     color: #A9A9A9;
     padding-left: 10px; }
-  .content__body {
-    padding: 20px 0;
-    border-bottom: 1px solid #DCDCDC; }
   .content__task {
     display: flex;
     align-items: center;
-    justify-content: space-between; }
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #DCDCDC; }
 
 .label {
   display: flex;

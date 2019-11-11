@@ -23,6 +23,7 @@ var data = {
         "November",
         "December"
     ],
+    datesCreated: JSON.parse(localStorage.getItem('datesCreated') || '[]'),
     down: false,
     accountName: 'Justin Pot',
     projectTitle: 'Projects',
@@ -210,7 +211,7 @@ Vue.component('modal-add-task-component', {
     methods: {
         addTask: function () {
             if (this.newTask !== null) {
-                let dateCreated = this.today.getFullYear() + "/" + this.today.getMonth() + "/" + this.today.getDate()
+                let dateCreated = this.today.getFullYear() + "/" + (this.today.getMonth() + 1) + "/" + this.today.getDate() + "/" + this.days[this.today.getDay()]
                 this.selected.number++
                 this.tasks.push({
                     id: this.tasks.length,
@@ -224,9 +225,26 @@ Vue.component('modal-add-task-component', {
                     completed: false
                 })
 
+                // Save or Update dateCreated under LocalStorage
+                if (this.datesCreated.length === 0) {
+                    this.datesCreated.push(dateCreated)
+                } else {
+                    let hadDateCreated = false
+                    for (let i = 0; i < this.datesCreated.length; i++) {
+                        if (this.datesCreated[i] === dateCreated) {
+                            hadDateCreated = true
+                        }
+                    }
+                    if (!hadDateCreated) {
+                        this.datesCreated.push(dateCreated)
+                    }
+                }
+                localStorage.setItem('datesCreated', JSON.stringify(this.datesCreated))
+                console.log(this.datesCreated)
+
                 // Update Project Number under LocalStorage
                 for (let i = 0; i < this.projects.length; i++) {
-                    if(this.selected.name === this.projects[i].name){
+                    if(this.projects[i].name === this.selected.name){
                         this.projects[i].number = this.selected.number
                     }
                 }
@@ -269,24 +287,25 @@ Vue.component('modal-add-task-component', {
                 </div>`
 })
 
-Vue.component('content-header', {
+Vue.component('content-component', {
     data: function () {
         return data
     },
-    template: `<div class="content__header">
-                    <div class="content__time">{{ days[today.getDay()] }}</div>
-                    <div class="content__day">{{ months[today.getMonth()] + " " + today.getDate() }}</div>
-                </div>`
-})
-
-Vue.component('task-component', {
-    data: function () {
-        return data
+    computed: {
+        sortDate: function () {
+            return this.datesCreated.sort(function(a,b){
+                return new Date(b) - new Date(a)
+            })
+            // return this.tasks.sort(function(a,b){
+            //     return new Date(b.dateCreated) - new Date(a.dateCreated)
+            // })
+        }
     },
     methods: {
         toggleChecked: function (task) {
             task.completed = !task.completed
 
+            // Update Task Completed or Not Completed under LocalStorage
             for (let i = 0; i < this.tasks.length; i++) {
                 if(this.tasks[i].id === task.id) {
                     this.tasks[i].completed = task.completed
@@ -295,28 +314,25 @@ Vue.component('task-component', {
             localStorage.setItem("tasks", JSON.stringify(this.tasks))
         }
     },
-    template: `<div class="content__body" v-for="task in tasks">
-                    <div v-bind:class="{ content__task: true, task: true, completed: task.completed }">
-                        <div class="task__header">
-<!--                            <input type="checkbox" v-model="checked" v-bind:value="task.completed" @change="toggleChecked" class="task__checkbox">-->
-                            <input type="checkbox" v-model="task.completed" v-bind:value="task.id" @click="toggleChecked(task)" class="task__checkbox">  
-                            <span class="task__name">{{ task.name }}</span>
-                        </div>
-                        <div class="project">
-                            <div class="project__name">{{ task.selected.name }}</div>
-                            <div class="project__icon" v-bind:style="{ 'background-color': task.selected.color }"></div>
+    template: `<div class="content" v-for="date in sortDate">
+                    <div class="content__header">
+                        <div class="content__time" v-if="date === today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()+'/'+days[today.getDay()]">Today</div>
+                        <div class="content__time" v-else>{{ date.split("/")[3] }}</div>
+                        <div class="content__day">{{ months[date.split("/")[1] - 1] + " " + date.split("/")[2] }}</div>
+                    </div>
+                    <div class="content__body" v-for="task in tasks">
+                        <div v-bind:class="{ content__task: true, task: true, completed: task.completed }" v-if="task.dateCreated === date">
+                            <div class="task__header">
+                                <!--<input type="checkbox" v-model="checked" v-bind:value="task.completed" @change="toggleChecked" class="task__checkbox">-->
+                                <input type="checkbox" v-model="task.completed" v-bind:value="task.id" @click="toggleChecked(task)" class="task__checkbox">  
+                                <span class="task__name">{{ task.name }}</span>
+                            </div>
+                            <div class="project">
+                                <div class="project__name">{{ task.selected.name }}</div>
+                                <div class="project__icon" v-bind:style="{ 'background-color': task.selected.color }"></div>
+                            </div>
                         </div>
                     </div>
-                </div>`
-})
-
-Vue.component('content-component', {
-    data: function () {
-        return data
-    },
-    template: `<div class="content">
-                    <content-header></content-header>
-                    <task-component></task-component>
                 </div>`
 })
 

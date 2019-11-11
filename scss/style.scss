@@ -107,14 +107,12 @@ button:focus {
         color: #A9A9A9;
         padding-left: 10px;
     }
-    &__body {
-        padding: 20px 0;
-        border-bottom: 1px solid #DCDCDC;
-    }
     &__task {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 20px 0;
+        border-bottom: 1px solid #DCDCDC;
     }
 }
 
