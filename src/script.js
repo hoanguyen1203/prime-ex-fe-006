@@ -211,7 +211,8 @@ Vue.component('modal-add-task-component', {
     methods: {
         addTask: function () {
             if (this.newTask !== null) {
-                let dateCreated = this.today.getFullYear() + "/" + (this.today.getMonth() + 1) + "/" + this.today.getDate() + "/" + this.days[this.today.getDay()]
+                let dateCreated = this.today.getFullYear() + "/" + (this.today.getMonth() + 1) + "/" + this.today.getDate()
+                let day = this.days[this.today.getDay()]
                 this.selected.number++
                 this.tasks.push({
                     id: this.tasks.length,
@@ -222,6 +223,7 @@ Vue.component('modal-add-task-component', {
                         number: this.selected.number
                     },
                     dateCreated: dateCreated,
+                    day: day,
                     completed: false
                 })
 
@@ -316,8 +318,8 @@ Vue.component('content-component', {
     },
     template: `<div class="content" v-for="date in sortDate">
                     <div class="content__header">
-                        <div class="content__time" v-if="date === today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()+'/'+days[today.getDay()]">Today</div>
-                        <div class="content__time" v-else>{{ date.split("/")[3] }}</div>
+                        <div class="content__time" v-if="date === today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()">Today</div>
+                        <div class="content__time" v-else>{{ days[new Date(date).getDay()] }}</div>
                         <div class="content__day">{{ months[date.split("/")[1] - 1] + " " + date.split("/")[2] }}</div>
                     </div>
                     <div class="content__body" v-for="task in tasks">
