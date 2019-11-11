@@ -51,8 +51,7 @@ var data = {
     newTask: '',
     selected: {},
     checked: [],
-    tasks: JSON.parse(localStorage.getItem('tasks') || '[]'),
-    id: 0
+    tasks: JSON.parse(localStorage.getItem('tasks') || '[]')
 }
 
 Vue.component('header-component', {
@@ -211,27 +210,27 @@ Vue.component('modal-add-task-component', {
     methods: {
         addTask: function () {
             if (this.newTask !== null) {
+                let dateCreated = this.today.getFullYear() + "/" + this.today.getMonth() + "/" + this.today.getDate()
                 this.selected.number++
                 this.tasks.push({
-                    id: this.id,
+                    id: this.tasks.length,
                     name: this.newTask,
                     selected: {
                         name: this.selected.name,
                         color: this.selected.color,
                         number: this.selected.number
                     },
+                    dateCreated: dateCreated,
                     completed: false
                 })
-                this.id++
 
                 // Update Project Number under LocalStorage
-                let projects = JSON.parse(localStorage.projects)
-                for (let i = 0; i < projects.length; i++) {
-                    if(this.selected.name === projects[i].name){
-                        projects[i].number = this.selected.number
+                for (let i = 0; i < this.projects.length; i++) {
+                    if(this.selected.name === this.projects[i].name){
+                        this.projects[i].number = this.selected.number
                     }
                 }
-                localStorage.setItem("projects", JSON.stringify(projects))
+                localStorage.setItem("projects", JSON.stringify(this.projects))
             }
             this.newTask = ''
             this.selected = {}
@@ -288,14 +287,12 @@ Vue.component('task-component', {
         toggleChecked: function (task) {
             task.completed = !task.completed
 
-            let tasks = JSON.parse(localStorage.tasks)
-            for (let i = 0; i < tasks.length; i++) {
-                if(tasks[i].id === task.id) {
-                    tasks[i].completed = task.completed
+            for (let i = 0; i < this.tasks.length; i++) {
+                if(this.tasks[i].id === task.id) {
+                    this.tasks[i].completed = task.completed
                 }
             }
-
-            localStorage.setItem("tasks", JSON.stringify(tasks))
+            localStorage.setItem("tasks", JSON.stringify(this.tasks))
         }
     },
     template: `<div class="content__body" v-for="task in tasks">
