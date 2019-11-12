@@ -212,7 +212,6 @@ Vue.component('modal-add-task-component', {
         addTask: function () {
             if (this.newTask !== null) {
                 let dateCreated = this.today.getFullYear() + "/" + (this.today.getMonth() + 1) + "/" + this.today.getDate()
-                let day = this.days[this.today.getDay()]
                 this.selected.number++
                 this.tasks.push({
                     id: this.tasks.length,
@@ -223,7 +222,6 @@ Vue.component('modal-add-task-component', {
                         number: this.selected.number
                     },
                     dateCreated: dateCreated,
-                    day: day,
                     completed: false
                 })
 
@@ -242,7 +240,6 @@ Vue.component('modal-add-task-component', {
                     }
                 }
                 localStorage.setItem('datesCreated', JSON.stringify(this.datesCreated))
-                console.log(this.datesCreated)
 
                 // Update Project Number under LocalStorage
                 for (let i = 0; i < this.projects.length; i++) {
