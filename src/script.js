@@ -320,7 +320,7 @@ Vue.component('content-component', {
                         <div class="content__day">{{ months[date.split("/")[1] - 1] + " " + date.split("/")[2] }}</div>
                     </div>
                     <div class="content__body" v-for="task in tasks">
-                        <div v-bind:class="{ content__task: true, task: true, completed: task.completed }" v-if="task.dateCreated === date">
+                        <div class="content__task task" v-bind:class="{ completed: task.completed }" v-if="task.dateCreated === date">
                             <div class="task__header">
                                 <!--<input type="checkbox" v-model="checked" v-bind:value="task.completed" @change="toggleChecked" class="task__checkbox">-->
                                 <input type="checkbox" v-model="task.completed" v-bind:value="task.id" @click="toggleChecked(task)" class="task__checkbox">  
