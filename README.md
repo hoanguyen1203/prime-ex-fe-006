@@ -1,4 +1,4 @@
-# Project - GridStackWraper
+# Project - To Do App
 - Using VueJs in order to build To to list.
 
 - Submitted by: Hoa Nguyen
