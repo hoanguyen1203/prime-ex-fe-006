@@ -29,10 +29,6 @@ button:focus {
     outline: none;
 }
 
-.w-70 {
-    width: 70%;
-}
-
 #app {
     display: flex;
     flex-wrap: wrap;
@@ -68,11 +64,12 @@ button:focus {
     & > div {
         padding: 15px 20px;
     }
-    &__account {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #DCDCDC;
-    }
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #DCDCDC;
     &__avatar {
         width: 60px;
         height: 60px;
@@ -82,36 +79,8 @@ button:focus {
             border-radius: 100%;
         }
     }
-    &__name-account {
+    &__name {
         padding-left: 20px;
-    }
-}
-
-.contents {
-    width: 70%;
-    padding: 30px 0;
-}
-
-.content {
-    padding: 20px 50px;
-    &__time,
-    &__day {
-        display: inline-block;
-    }
-    &__time {
-        font-size: 24px;
-    }
-    &__day {
-        font-size: 14px;
-        color: #A9A9A9;
-        padding-left: 10px;
-    }
-    &__task {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 0;
-        border-bottom: 1px solid #DCDCDC;
     }
 }
 
@@ -130,6 +99,15 @@ button:focus {
     &__number {
         color: #A9A9A9;
         font-weight: 400;
+    }
+}
+
+.projects {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
     }
 }
 
@@ -170,7 +148,40 @@ button:focus {
     transform: rotate(180deg);
 }
 
+.contents {
+    width: 70%;
+    padding: 30px 0;
+}
+
+.tasks {
+    padding: 20px 50px;
+    &__time,
+    &__day {
+        display: inline-block;
+    }
+    &__time {
+        font-size: 24px;
+    }
+    &__day {
+        font-size: 14px;
+        color: #A9A9A9;
+        padding-left: 10px;
+    }
+    &__task {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+        border-bottom: 1px solid #DCDCDC;
+    }
+}
+
 .task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #DCDCDC;
     &__name {
         font-size: 20px;
         margin-left: 10px;

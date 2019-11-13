@@ -23,9 +23,6 @@ button {
 button:focus {
   outline: none; }
 
-.w-70 {
-  width: 70%; }
-
 #app {
   display: flex;
   flex-wrap: wrap; }
@@ -55,40 +52,20 @@ button:focus {
   border-right: 1px solid #DCDCDC; }
   .sidebar > div {
     padding: 15px 20px; }
-  .sidebar__account {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #DCDCDC; }
-  .sidebar__avatar {
+
+.account {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #DCDCDC; }
+  .account__avatar {
     width: 60px;
     height: 60px; }
-    .sidebar__avatar img {
+    .account__avatar img {
       width: 100%;
       height: 100%;
       border-radius: 100%; }
-  .sidebar__name-account {
+  .account__name {
     padding-left: 20px; }
-
-.contents {
-  width: 70%;
-  padding: 30px 0; }
-
-.content {
-  padding: 20px 50px; }
-  .content__time, .content__day {
-    display: inline-block; }
-  .content__time {
-    font-size: 24px; }
-  .content__day {
-    font-size: 14px;
-    color: #A9A9A9;
-    padding-left: 10px; }
-  .content__task {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-    border-bottom: 1px solid #DCDCDC; }
 
 .label {
   display: flex;
@@ -102,6 +79,12 @@ button:focus {
   .label__number {
     color: #A9A9A9;
     font-weight: 400; }
+
+.projects__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; }
 
 .project {
   display: flex;
@@ -132,9 +115,36 @@ button:focus {
 .rotate-180 {
   transform: rotate(180deg); }
 
-.task__name {
-  font-size: 20px;
-  margin-left: 10px; }
+.contents {
+  width: 70%;
+  padding: 30px 0; }
+
+.tasks {
+  padding: 20px 50px; }
+  .tasks__time, .tasks__day {
+    display: inline-block; }
+  .tasks__time {
+    font-size: 24px; }
+  .tasks__day {
+    font-size: 14px;
+    color: #A9A9A9;
+    padding-left: 10px; }
+  .tasks__task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #DCDCDC; }
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid #DCDCDC; }
+  .task__name {
+    font-size: 20px;
+    margin-left: 10px; }
 
 .completed .task__name,
 .completed .project__name {

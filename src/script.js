@@ -73,25 +73,25 @@ Vue.component('header-component', {
                 </header>`
 })
 
-Vue.component('sidebar-account', {
+Vue.component('account', {
     data: function () {
         return data
     },
-    template: `<div class="sidebar__account">
-                    <div class="sidebar__avatar">
+    template: `<div class="account">
+                    <div class="account__avatar">
                         <img src="/images/avatar.jpeg" alt="Avatar">
                     </div>
-                    <div class="sidebar__name-account">
+                    <div class="account__name">
                         {{ accountName }}
                     </div>
                 </div>`
 })
 
-Vue.component('sidebar-labels', {
+Vue.component('labels', {
     data: function () {
         return data
     },
-    template: `<div class="sidebar__labels">
+    template: `<div class="labels">
                     <div class="label" v-for="label in labels">
                         <div class="label__title">
                             <div class="label__icon"><i v-bind:class="label.icon"></i></div>
@@ -102,7 +102,7 @@ Vue.component('sidebar-labels', {
                 </div>`
 })
 
-Vue.component('project-component', {
+Vue.component('project', {
     data: function () {
         return data
     },
@@ -115,7 +115,7 @@ Vue.component('project-component', {
                 </div>`
 })
 
-Vue.component('sidebar-projects', {
+Vue.component('projects', {
     data: function () {
         return data
     },
@@ -128,14 +128,14 @@ Vue.component('sidebar-projects', {
             }
         }
     },
-    template: `<div class="sidebar__projects">
-                    <div class="project">
+    template: `<div class="projects">
+                    <div class="projects__header">
                         <h2>{{ projectTitle }}</h2>
                         <button :class="{ 'rotate-180': down }" href="#show-projects" data-toggle="collapse"
                             @click="toggleRotate"><i class="fa fa-angle-up"></i></button>
                     </div>
-                    <div id="show-projects" class="projects collapse in">
-                        <project-component></project-component>
+                    <div id="show-projects" class="projectList collapse in">
+                        <project></project>
 
                         <button class="project__add" data-toggle="modal" data-target="#modalAddProject">
                             <i class="material-icons">add</i>
@@ -150,9 +150,9 @@ Vue.component('sidebar-component', {
         return data
     },
     template: `<aside class="sidebar">
-                    <sidebar-account></sidebar-account>
-                    <sidebar-labels></sidebar-labels>
-                    <sidebar-projects></sidebar-projects>
+                    <account></account>
+                    <labels></labels>
+                    <projects></projects>
                 </aside>`
 })
 
@@ -212,46 +212,51 @@ Vue.component('modal-add-task-component', {
         addTask: function () {
             if (this.newTask !== '') {
                 let dateCreated = this.today.getFullYear() + "/" + (this.today.getMonth() + 1) + "/" + this.today.getDate()
-                this.selected.number++
                 this.tasks.push({
                     id: this.tasks.length,
                     name: this.newTask,
                     selected: {
                         name: this.selected.name,
                         color: this.selected.color,
-                        number: this.selected.number
+                        number: this.selected.number++
                     },
                     dateCreated: dateCreated,
                     completed: false
                 })
 
-                // Save or Update dateCreated under LocalStorage
-                if (this.datesCreated.length === 0) {
-                    this.datesCreated.push(dateCreated)
-                } else {
-                    let hadDateCreated = false
-                    for (let i = 0; i < this.datesCreated.length; i++) {
-                        if (this.datesCreated[i] === dateCreated) {
-                            hadDateCreated = true
-                        }
-                    }
-                    if (!hadDateCreated) {
-                        this.datesCreated.push(dateCreated)
-                    }
-                }
-                localStorage.setItem('datesCreated', JSON.stringify(this.datesCreated))
+                // Save dateCreated under LocalStorage
+                this.saveDateCreated(dateCreated)
 
                 // Update Project Number under LocalStorage
-                for (let i = 0; i < this.projects.length; i++) {
-                    if(this.projects[i].name === this.selected.name){
-                        this.projects[i].number = this.selected.number
-                    }
-                }
-                localStorage.setItem("projects", JSON.stringify(this.projects))
+                this.updateProjectNumber()
             }
             this.newTask = ''
             this.selected = {}
             this.saveTasks()
+        },
+        saveDateCreated: function (dateCreated) {
+            if (this.datesCreated.length === 0) {
+                this.datesCreated.push(dateCreated)
+            } else {
+                let hadDateCreated = false
+                for (let i = 0; i < this.datesCreated.length; i++) {
+                    if (this.datesCreated[i] === dateCreated) {
+                        hadDateCreated = true
+                    }
+                }
+                if (!hadDateCreated) {
+                    this.datesCreated.push(dateCreated)
+                }
+            }
+            localStorage.setItem('datesCreated', JSON.stringify(this.datesCreated))
+        },
+        updateProjectNumber: function () {
+            for (let i = 0; i < this.projects.length; i++) {
+                if(this.projects[i].name === this.selected.name){
+                    this.projects[i].number = this.selected.number
+                }
+            }
+            localStorage.setItem("projects", JSON.stringify(this.projects))
         },
         saveTasks: function () {
             localStorage.setItem('tasks', JSON.stringify(this.tasks))
@@ -313,14 +318,14 @@ Vue.component('content-component', {
             localStorage.setItem("tasks", JSON.stringify(this.tasks))
         }
     },
-    template: `<div class="content" v-for="date in sortDate">
-                    <div class="content__header">
-                        <div class="content__time" v-if="date === today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()">Today</div>
-                        <div class="content__time" v-else>{{ days[new Date(date).getDay()] }}</div>
-                        <div class="content__day">{{ months[date.split("/")[1] - 1] + " " + date.split("/")[2] }}</div>
+    template: `<div class="tasks" v-for="date in sortDate">
+                    <div class="tasks__header">
+                        <div class="tasks__time" v-if="date === today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()">Today</div>
+                        <div class="tasks__time" v-else>{{ days[new Date(date).getDay()] }}</div>
+                        <div class="tasks__day">{{ months[date.split("/")[1] - 1] + " " + date.split("/")[2] }}</div>
                     </div>
-                    <div class="content__body" v-for="task in tasks">
-                        <div class="content__task task" v-bind:class="{ completed: task.completed }" v-if="task.dateCreated === date">
+                    <div class="tasks__body" v-for="task in tasks">
+                        <div class="task" v-bind:class="{ completed: task.completed }" v-if="task.dateCreated === date">
                             <div class="task__header">
                                 <!--<input type="checkbox" v-model="checked" v-bind:value="task.completed" @change="toggleChecked" class="task__checkbox">-->
                                 <input type="checkbox" v-model="task.completed" v-bind:value="task.id" @click="toggleChecked(task)" class="task__checkbox">  

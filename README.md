@@ -57,7 +57,7 @@
 
 ## Preview how it work
 
-![GridStackWraper!](https://github.com/hoanguyen1203/prime-ex-fe-006/blob/master/todolist.gif)
+![ToDoApp!](https://github.com/hoanguyen1203/prime-ex-fe-006/blob/master/todolist.gif)
 
 
 # License
