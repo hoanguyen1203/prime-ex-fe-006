@@ -162,7 +162,7 @@ Vue.component('modal-add-project-component', {
     },
     methods: {
         addProject: function () {
-            if (this.newProject !== null) {
+            if (this.newProject !== '') {
                 this.projects.push({
                     name: this.newProject,
                     color: this.newProjectColor,
@@ -210,7 +210,7 @@ Vue.component('modal-add-task-component', {
     },
     methods: {
         addTask: function () {
-            if (this.newTask !== null) {
+            if (this.newTask !== '') {
                 let dateCreated = this.today.getFullYear() + "/" + (this.today.getMonth() + 1) + "/" + this.today.getDate()
                 this.selected.number++
                 this.tasks.push({
