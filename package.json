@@ -4,7 +4,7 @@
   "description": "- Using Resource GRIDSTACK.JS in order to build project.",
   "main": "index.js",
   "dependencies": {
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "serve": "^11.2.0"
   },
   "devDependencies": {
